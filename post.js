@@ -1,11 +1,13 @@
 const cache = require("@actions/cache");
 const exec = require("@actions/exec");
 const core = require("@actions/core");
-const fs = require("fs");
+const { getCacheKey } = require("./cache-key");
 
 async function run() {
-  const key = `nix-store-${process.env.RUNNER_OS}`;
+  const key = getCacheKey();
   const paths = ["the-export-file"];
+
+  core.info(`Cache key: ${key}`);
 
   try {
     await exec.exec("bash", [
