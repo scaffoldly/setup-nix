@@ -2,47 +2,11 @@
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 9292:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const crypto = __nccwpck_require__(6982);
-const fs = __nccwpck_require__(9896);
-const path = __nccwpck_require__(6928);
-
-function findFlakeLocks(dir, files = []) {
-  try {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        findFlakeLocks(fullPath, files);
-      } else if (entry.name === "flake.lock") {
-        files.push(fullPath);
-      }
-    }
-  } catch (error) {
-    // Skip directories we can't read
-  }
-  return files;
-}
+/***/ ((module) => {
 
 function getCacheKey() {
   const os = process.env.RUNNER_OS || "unknown";
-
-  const files = findFlakeLocks("/nix/store");
-  files.sort();
-
-  const hash = crypto.createHash("sha256");
-  for (const file of files) {
-    try {
-      const content = fs.readFileSync(file);
-      hash.update(content);
-    } catch (error) {
-      // Skip files we can't read
-    }
-  }
-
-  const hashHex = hash.digest("hex").substring(0, 16);
-  return `${os}-nix-store-${hashHex}`;
+  return `${os}-nix-store`;
 }
 
 module.exports = { getCacheKey };
