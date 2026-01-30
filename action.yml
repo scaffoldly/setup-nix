@@ -1,0 +1,10 @@
+name: Cache Nix Action
+description: Backup and Restore of the Nix Store
+author: Scaffoldly <github.com/scaffoldly>
+branding:
+  icon: archive
+  color: gray-dark
+runs:
+  using: "node20"
+  main: "dist/main/index.js"
+  post: "dist/post/index.js"

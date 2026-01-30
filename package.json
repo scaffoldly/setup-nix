@@ -1,0 +1,19 @@
+{
+  "name": "cache-nix-action",
+  "version": "1.0.0",
+  "description": "Backup and Restore of the Nix Store",
+  "main": "main.js",
+  "scripts": {
+    "build": "npm run build:main && npm run build:post",
+    "build:main": "ncc build main.js -o dist/main",
+    "build:post": "ncc build post.js -o dist/post"
+  },
+  "dependencies": {
+    "@actions/cache": "^4.0.0",
+    "@actions/core": "^1.11.0",
+    "@actions/exec": "^1.1.1"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.4"
+  }
+}
