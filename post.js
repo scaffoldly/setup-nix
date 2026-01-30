@@ -4,6 +4,13 @@ const core = require("@actions/core");
 const { getCacheKey } = require("./cache-key");
 
 async function run() {
+  const cacheHit = core.getState("cache-hit") === "true";
+
+  if (cacheHit) {
+    core.info("Cache hit with exact key, skipping save");
+    return;
+  }
+
   const key = getCacheKey();
   const paths = ["the-export-file"];
 

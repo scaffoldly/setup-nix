@@ -82076,12 +82076,15 @@ async function run() {
     const cacheKey = await cache.restoreCache(paths, key);
     if (cacheKey) {
       core.info(`Cache restored from key: ${cacheKey}`);
+      core.saveState("cache-hit", cacheKey === key ? "true" : "false");
     } else {
       core.info("No cache found, skipping import");
+      core.saveState("cache-hit", "false");
       return;
     }
   } catch (error) {
     core.warning(`Cache restore failed: ${error.message}`);
+    core.saveState("cache-hit", "false");
     return;
   }
 

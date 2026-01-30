@@ -82066,6 +82066,13 @@ const core = __nccwpck_require__(7484);
 const { getCacheKey } = __nccwpck_require__(9292);
 
 async function run() {
+  const cacheHit = core.getState("cache-hit") === "true";
+
+  if (cacheHit) {
+    core.info("Cache hit with exact key, skipping save");
+    return;
+  }
+
   const key = getCacheKey();
   const paths = ["the-export-file"];
 
