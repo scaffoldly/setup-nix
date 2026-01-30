@@ -4,6 +4,11 @@ author: Scaffoldly <github.com/scaffoldly>
 branding:
   icon: archive
   color: gray-dark
+inputs:
+  key:
+    description: "Cache key"
+    required: false
+    default: "${{ runner.os }}-nix-store"
 runs:
   using: "node20"
   main: "dist/main/index.js"

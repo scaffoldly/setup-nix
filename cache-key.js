@@ -1,6 +1,7 @@
+const core = require("@actions/core");
+
 function getCacheKey() {
-  const os = process.env.RUNNER_OS || "unknown";
-  return `${os}-nix-store`;
+  return core.getInput("key") || `${process.env.RUNNER_OS || "unknown"}-nix-store`;
 }
 
 module.exports = { getCacheKey };

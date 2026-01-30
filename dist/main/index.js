@@ -2,11 +2,12 @@
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 9292:
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const core = __nccwpck_require__(7484);
 
 function getCacheKey() {
-  const os = process.env.RUNNER_OS || "unknown";
-  return `${os}-nix-store`;
+  return core.getInput("key") || `${process.env.RUNNER_OS || "unknown"}-nix-store`;
 }
 
 module.exports = { getCacheKey };
