@@ -9,6 +9,10 @@ inputs:
     description: "Cache key"
     required: false
     default: "${{ runner.os }}-nix-store"
+  github-token:
+    description: The GitHub Token to use for deployment
+    required: false
+    default: ${{ github.token }}
 runs:
   using: "node24"
   main: "dist/main/index.js"
