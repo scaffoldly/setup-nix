@@ -7,7 +7,7 @@
 const core = __nccwpck_require__(7484);
 
 function getCacheKey() {
-  return core.getInput("key") || `${process.env.RUNNER_OS || "unknown"}-nix-store`;
+  return core.getInput("cache-key") || `${process.env.RUNNER_OS || "unknown"}-nix-store`;
 }
 
 module.exports = { getCacheKey };
