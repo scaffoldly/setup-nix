@@ -1,19 +1,44 @@
-name: Cache Nix Action
-description: Backup and Restore of the Nix Store
+name: Setup Nix Action
+description: Setup Nix on the GitHub Actions runner
 author: Scaffoldly <github.com/scaffoldly>
 branding:
-  icon: archive
+  icon: terminal
   color: gray-dark
 inputs:
-  key:
-    description: "Cache key"
-    required: false
-    default: "${{ runner.os }}-nix-store"
   github-token:
-    description: The GitHub Token to use for deployment
+    description: "GitHub token for API rate limits"
     required: false
     default: ${{ github.token }}
+  cache-key:
+    description: "Cache key"
+    required: false
+    default: "${{ runner.os }}-nix-store-${{ hashFiles('**/*.nix', '**/*.lock') }}"
+  enable-kvm:
+    description: "Enable KVM for hardware-accelerated virtualization on Linux, if available"
+    required: false
+    default: "true"
+  set-as-trusted-user:
+    description: "Add user to trusted-users in nix.conf"
+    required: false
+    default: "true"
+  extra-nix-config:
+    description: "Additional nix.conf configuration"
+    required: false
+    default: ""
+  install-options:
+    description: "Additional options for the Nix installer"
+    required: false
+    default: ""
+  install-url:
+    description: "Custom URL for the Nix installer script"
+    required: false
+    default: ""
+  nix-path:
+    description: "Custom NIX_PATH to set"
+    required: false
+    default: ""
 runs:
   using: "node24"
+  pre: "dist/pre/index.js"
   main: "dist/main/index.js"
   post: "dist/post/index.js"

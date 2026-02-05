@@ -1,10 +1,11 @@
 {
-  "name": "cache-nix-action",
+  "name": "setup-nix",
   "version": "1.0.0",
-  "description": "Backup and Restore of the Nix Store",
+  "description": "Setup Nix on the GitHub Actions runner",
   "main": "main.js",
   "scripts": {
-    "build": "npm run build:main && npm run build:post",
+    "build": "npm run build:pre && npm run build:main && npm run build:post",
+    "build:pre": "ncc build pre.js -o dist/pre",
     "build:main": "ncc build main.js -o dist/main",
     "build:post": "ncc build post.js -o dist/post"
   },
