@@ -27560,9 +27560,8 @@ const core = __nccwpck_require__(7484);
 const path = __nccwpck_require__(6928);
 
 async function run() {
-  // GITHUB_ACTION_PATH points to the action's directory
-  const actionPath = process.env.GITHUB_ACTION_PATH || __dirname;
-  const scriptPath = path.join(actionPath, "install-nix.sh");
+  // Script is bundled alongside index.js in dist/pre/
+  const scriptPath = __nccwpck_require__.ab + "install-nix.sh";
 
   // Set up environment variables for the install script
   const env = {
@@ -27577,7 +27576,7 @@ async function run() {
   };
 
   try {
-    await exec.exec("bash", [scriptPath], { env });
+    await exec.exec("bash", [__nccwpck_require__.ab + "install-nix.sh"], { env });
     core.info("Nix installation completed successfully");
   } catch (error) {
     core.setFailed(`Nix installation failed: ${error.message}`);

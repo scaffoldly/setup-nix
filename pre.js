@@ -3,9 +3,8 @@ const core = require("@actions/core");
 const path = require("path");
 
 async function run() {
-  // GITHUB_ACTION_PATH points to the action's directory
-  const actionPath = process.env.GITHUB_ACTION_PATH || __dirname;
-  const scriptPath = path.join(actionPath, "install-nix.sh");
+  // Script is bundled alongside index.js in dist/pre/
+  const scriptPath = path.join(__dirname, "install-nix.sh");
 
   // Set up environment variables for the install script
   const env = {
